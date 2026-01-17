@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 const Homepage = () => {
   return  <div>Homepage</div>
@@ -7,3 +8,4 @@ const Homepage = () => {
 }
 
 export default Homepage
+ 
