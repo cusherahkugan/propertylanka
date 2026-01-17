@@ -14,3 +14,4 @@ const PropertyAddPage = () => {
 };
 
 export default PropertyAddPage;
+

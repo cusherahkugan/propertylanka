@@ -1,11 +1,18 @@
-import Link from "next/link"
+// app/page.jsx
+import Hero from '@/components/Hero';
+import InfoBoxes from '@/components/InfoBoxes';
+import HomeProperties from '@/components/HomeProperties';
+import FeaturedProperties from '@/components/FeaturedProperties';
 
 const Homepage = () => {
-  return  <div>Homepage</div>
+  return (
+    <>
+      <Hero />
+      <InfoBoxes />
+      <FeaturedProperties />
+      <HomeProperties />
+    </>
+  );
+};
 
-   
-  
-}
-
-export default Homepage
- 
+export default Homepage;

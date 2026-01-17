@@ -1,22 +1,32 @@
-import '@/assets/styles/globals.css'
+// app/layout.jsx
+import '@/assets/styles/globals.css';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import AuthProvider from '@/components/AuthProvider';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
-  title: 'Property Lanka',
-  description: 'Real Estate Website',
-}
+  title: 'PropertyLanka | Find Your Perfect Rental',
+  description: 'Find your dream rental property in Sri Lanka',
+  keywords: 'rental, property, real estate, Sri Lanka, apartments, houses',
+};
 
-const Mainlayout = ({children}) => {
+const MainLayout = ({ children }) => {
   return (
-    <html lang="en">
-       <body>
-        <div>
-      {children}
-       </div>
-       </body>
- 
-    </html>
-   
-  )
-}
+    <AuthProvider>
+      <html lang='en'>
+        <body>
+          <div className='flex flex-col min-h-screen'>
+            <Navbar />
+            <main className='flex-grow'>{children}</main>
+            <Footer />
+          </div>
+          <ToastContainer />
+        </body>
+      </html>
+    </AuthProvider>
+  );
+};
 
-export default Mainlayout;
+export default MainLayout;
