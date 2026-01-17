@@ -1,5 +1,5 @@
 // app/layout.jsx
-import '@/assets/styles/globals.css';
+import '@/app/globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AuthProvider from '@/components/AuthProvider';
