@@ -1,16 +1,36 @@
-// app/properties/add/page.jsx
-import PropertyAddForm from '@/components/PropertyAddForm';
+// app/api/bookmarks/check/route.js
+import connectDB from '@/config/database';
+import User from '@/models/User';
+import { getSessionUser } from '@/utils/getSessionUser';
 
-const PropertyAddPage = () => {
-  return (
-    <section className='bg-gradient-to-br from-blue-50 to-purple-50'>
-      <div className='container m-auto max-w-2xl py-24'>
-        <div className='bg-white px-6 py-8 mb-4 shadow-lg rounded-lg border border-gray-200 m-4 md:m-0'>
-          <PropertyAddForm />
-        </div>
-      </div>
-    </section>
-  );
+export const dynamic = 'force-dynamic';
+
+// POST /api/bookmarks/check
+export const POST = async (request) => {
+  try {
+    await connectDB();
+
+    const { propertyId } = await request.json();
+
+    const sessionUser = await getSessionUser();
+
+    if (!sessionUser || !sessionUser.userId) {
+      return new Response('User ID is required', { status: 401 });
+    }
+
+    const { userId } = sessionUser;
+
+    // Find user in database
+    const user = await User.findOne({ _id: userId });
+
+    // Check if property is bookmarked
+    let isBookmarked = user.bookmarks.includes(propertyId);
+
+    return new Response(JSON.stringify({ isBookmarked }), {
+      status: 200,
+    });
+  } catch (error) {
+    console.log(error);
+    return new Response('Something went wrong', { status: 500 });
+  }
 };
-
-export default PropertyAddPage;
